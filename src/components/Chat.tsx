@@ -1,8 +1,13 @@
 "use client";
 import React from "react";
-import { Accordion, AccordionTrigger } from "./ui/accordion";
-import { AccordionItem } from "@radix-ui/react-accordion";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "./ui/Accordion";
 import ChatHeader from "./ChatHeader";
+import ChatInput from "./ChatInput";
 
 interface ChatProps {}
 
@@ -19,6 +24,11 @@ const Chat: React.FC<ChatProps> = ({}) => {
             <AccordionTrigger className="border-b border-zinc-300 px-6">
               <ChatHeader />
             </AccordionTrigger>
+            <AccordionContent>
+              <div className="flex h-80 flex-col">
+                <ChatInput className="px-4" />
+              </div>
+            </AccordionContent>
           </div>
         </div>
       </AccordionItem>
