@@ -4,26 +4,51 @@ import TextAreaAutoSize from "react-textarea-autosize";
 import { useMutation } from "@tanstack/react-query";
 import { nanoid } from "nanoid";
 import { Message } from "@/lib/validators/messages.validator";
-import messageApis from "@/lib/routes/messages.api";
+import { messageApiRoutes } from "@/lib/modules/messages.api";
 
 interface ChatInputProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const ChatInput: React.FC<ChatInputProps> = ({ className, ...props }) => {
   const [input, setInput] = React.useState<string>("");
+
   const { mutate: sendMessage, isLoading } = useMutation({
+    mutationKey: ["sendMessage"],
     mutationFn: async (message: Message) => {
-      const response = await fetch(messageApis.messageApiRoutes.message, {
+      const response = await fetch(messageApiRoutes.message, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message }),
+        body: JSON.stringify({ messages: [message] }),
       });
 
       return response.body;
     },
-    onSuccess: async () => {
-      console.log("success");
+    onMutate: async (variables) => {},
+    onSuccess: async (data, variables, context) => {
+      if (!data) throw new Error("스트림을 찾지 못했습니다.");
+
+      const reader = data.getReader();
+      const decoder = new TextDecoder();
+
+      let done = false;
+
+      while (!done) {
+        const { value, done: doneReading } = await reader.read();
+        done = doneReading;
+        const chunkValue = decoder.decode(value);
+        console.log(chunkValue);
+      }
+
+      // construct new message to add
+      const id = nanoid();
+      const responseMessage: Message = {
+        id,
+        isUserMessage: false,
+        text: "",
+      };
+
+      // add new message to state
     },
   });
 
