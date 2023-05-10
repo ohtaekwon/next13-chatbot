@@ -8,6 +8,7 @@ import {
 } from "./ui/Accordion";
 import ChatHeader from "./ChatHeader";
 import ChatInput from "./ChatInput";
+import ChatMessages from "./ChatMessages";
 
 interface ChatProps {}
 
@@ -26,6 +27,7 @@ const Chat: React.FC<ChatProps> = ({}) => {
             </AccordionTrigger>
             <AccordionContent>
               <div className="flex h-80 flex-col">
+                <ChatMessages className="flex-1 px-2 py-3" />
                 <ChatInput className="px-4" />
               </div>
             </AccordionContent>

@@ -9,7 +9,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = () => {
         <p className="text-xs">Chat with</p>
         <div className="flex items-center gap-1.5">
           <p className="h-2 w-2 rounded-full bg-lime-500" />
-          <p className="font-medium	">BookBuddy support</p>
+          <p className="font-medium	">챗봇 지원중..</p>
         </div>
       </div>
     </div>
