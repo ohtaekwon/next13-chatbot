@@ -7,6 +7,8 @@ import { Message } from "@/lib/validators/messages.validator";
 import { messageApiRoutes } from "@/lib/modules/messages.api";
 import MsgContext from "@/store/Contexts/Messages";
 import { toast } from "react-hot-toast";
+import { CornerDownLeft, Loader2 } from "lucide-react";
+
 interface ChatInputProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const ChatInput: React.FC<ChatInputProps> = ({ className, ...props }) => {
@@ -96,19 +98,35 @@ const ChatInput: React.FC<ChatInputProps> = ({ className, ...props }) => {
       {...props}
       className={helpers.cn("border-t border-zinc-300", className)}
     >
-      <div className="relative mt-4 flex-1 overflow-hidden rounded-lg border-none outline-none"></div>
-      <TextAreaAutoSize
-        ref={textareaRef}
-        disabled={isLoading}
-        rows={2}
-        maxRows={4}
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        onKeyDown={onEnter}
-        autoFocus
-        placeholder="메시지를 작성해주세요"
-        className="peer block w-full resize-none border-0 bg-zinc-100 py-1.5 pr-14 text-sm text-gray-900 focus:ring-0 disabled:opacity-50 sm:leading-6"
-      />
+      <div className="relative mt-4 flex-1 overflow-hidden rounded-lg border-none outline-none">
+        <TextAreaAutoSize
+          ref={textareaRef}
+          disabled={isLoading}
+          rows={2}
+          maxRows={4}
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={onEnter}
+          autoFocus
+          placeholder="메시지를 작성해주세요"
+          className="peer block w-full resize-none border-0 bg-zinc-100 py-1.5 pr-14 text-sm text-gray-900 focus:ring-0 disabled:opacity-50 sm:leading-6"
+        />
+
+        <div className="absolute inset-y-0 right-0 flex py-1.5 pr-1.5">
+          <kbd className="inline-flex items-center rounded border border-gray-200 bg-white px-1 font-sans text-xs text-gray-400">
+            {isLoading ? (
+              <Loader2 className="h-3 w-3 animate-spin" />
+            ) : (
+              <CornerDownLeft className="h-3 w-3" />
+            )}
+          </kbd>
+        </div>
+
+        <div
+          className="absolute inset-x-0 bottom-0 border-t border-gray-300 peer-focus:border-t-2 peer-focus:border-indigo-600"
+          aria-hidden="true"
+        />
+      </div>
     </div>
   );
 };
