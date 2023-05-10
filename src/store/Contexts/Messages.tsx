@@ -3,7 +3,7 @@ import React from "react";
 import { Message } from "@/lib/validators/messages.validator";
 import { nanoid } from "nanoid";
 
-export const MessagesContext = React.createContext<{
+const MessagesContext = React.createContext<{
   messages: Message[];
   isMessageUpdating: boolean;
   addMessage: (message: Message) => void;
@@ -22,16 +22,18 @@ export const MessagesContext = React.createContext<{
   setIsMessageUpdating: () => {},
 });
 
-export function MessageProvider({ children }: { children: React.ReactNode }) {
+function MessageProvider({ children }: { children: React.ReactNode }) {
   const [isMessageUpdating, setIsMessageUpdating] =
     React.useState<boolean>(false);
   const [messages, setMessages] = React.useState<Message[]>([
     {
       id: nanoid(),
-      text: "Hello, how can I help you",
+      text: "뭐? 도와줘?",
       isUserMessage: false,
     },
   ]);
+
+  console.log(messages)
   const addMessage = (message: Message) => {
     setMessages((allMessages) => [...allMessages, message]);
   };
@@ -71,3 +73,5 @@ export function MessageProvider({ children }: { children: React.ReactNode }) {
     </MessagesContext.Provider>
   );
 }
+
+export default { MessagesContext, MessageProvider };
