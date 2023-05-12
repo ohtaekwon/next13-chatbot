@@ -5,7 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { nanoid } from "nanoid";
 import { Message } from "@/lib/validators/messages.validator";
 import { messageApiRoutes } from "@/lib/modules/messages.api";
-import MsgContext from "@/store/Contexts/Messages";
+import MsgContext from "@/components/context/Messages";
 import { toast } from "react-hot-toast";
 import { CornerDownLeft, Loader2 } from "lucide-react";
 

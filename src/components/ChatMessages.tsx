@@ -1,6 +1,6 @@
 "use Client";
 import React, { HTMLAttributes, useContext } from "react";
-import MsgContext from "@/store/Contexts/Messages";
+import MsgContext from "@/components/context/Messages";
 import helpers from "@/lib/utils/helpers";
 import MarkdownLite from "./MarkdownLite";
 

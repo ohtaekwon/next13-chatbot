@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-import MsgContext from "@/store/Contexts/Messages";
+import MsgContext from "@/components/context/Messages";
 
 interface ProvidersProps {
   children: React.ReactNode;
